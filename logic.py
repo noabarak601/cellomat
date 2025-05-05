@@ -123,8 +123,9 @@ def create_zero_matrix(n):
 
     # Choose a random top-left coordinate where the pattern will fit
     max_start = n - 6
-    start_row = random.randint(0, max_start)
-    start_col = random.randint(0, max_start)
+    start_row = random.randrange(0, max_start, 2)
+
+    start_col = random.randrange(0, max_start, 2)
 
     # Insert the pattern into the matrix
     for i in range(6):
@@ -150,8 +151,9 @@ def create_squeres_matrix(n):
 
     # Choose a random top-left coordinate where the pattern will fit
     max_start = n - 4
-    start_row = random.randint(0, max_start)
-    start_col = random.randint(0, max_start)
+    start_row = random.randrange(0, max_start, 2)
+
+    start_col = random.randrange(0, max_start, 2)
 
     # Insert the pattern into the matrix
     for i in range(4):
