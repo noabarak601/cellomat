@@ -1,4 +1,4 @@
-from logic import print_matrix, nextGen
+
 from ui import show_welcome_popup
 from gui import launch_welcome_screen
 

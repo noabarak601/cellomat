@@ -22,7 +22,7 @@ FPS         = 30
 
 
 TABLE_ROWS  = [
-    "Stability", "Birth Rate", "Death Rate", "Boundary Energy"
+    "Stability", "Birth Rate", "Death Rate"
 ]
 TABLE_COLS  = ["Average", "Standard deviation", "Maximum", "Minimum"]
 def create_map():
@@ -203,6 +203,7 @@ def run_game(size=100, pattern="random", p_alive=0.5,
             gen += 1
 
         ##stats
+
         update_stats(stats,board,board_copy,gen-1)
 
 

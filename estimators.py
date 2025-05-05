@@ -87,19 +87,7 @@ def update_stats(stats, board, board_copy,gen):
 
     stats["Standard deviation"]["Death Rate"] = update_std(gen-1,stats["Average"]["Death Rate"]/gen,stats["Standard deviation"]["Death Rate"],curr_deathrate)
 
-    # 4) Boundary Energy
-    curr_boundary_energy = boundary_energy(curr_np)
-    stats["Average"]["Boundary Energy"] += curr_boundary_energy
 
-    if (stats["Minimum"]["Boundary Energy"] > curr_boundary_energy):
-        stats["Minimum"]["Boundary Energy"] = curr_boundary_energy
-
-    if (stats["Maximum"]["Boundary Energy"] < curr_boundary_energy):
-        stats["Maximum"]["Boundary Energy"] = curr_boundary_energy
-
-    stats["Standard deviation"]["Boundary Energy"] = update_std(gen-1,
-                                                           stats["Average"]["Boundary Energy"]/gen,
-                                                           stats["Standard deviation"]["Boundary Energy"], curr_boundary_energy)
 
 
 
