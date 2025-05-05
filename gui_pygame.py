@@ -108,7 +108,7 @@ def show_summary(steps, board_size:int, pattern:str,
 
 
         # info strip (text only)
-        info = f"board size: {board_size}    Steps: {steps}    Pattern: {pattern}"
+        info = f"Board Size: {board_size}    Steps: {steps}    Pattern: {pattern}"
         if pattern.startswith("random"):
             info += f"    Probability: {probability}"
         info += f"    Wrap around: {'true' if wraparound else 'false'}"
@@ -234,7 +234,10 @@ def run_game(size=100, pattern="random", p_alive=0.5,
 
     pygame.quit()
     for val in stats["Average"]:
-        stats["Average"][val] = stats["Average"][val]/(gen-1)
+        if(gen == 1):
+            stats["Average"][val] = stats["Average"][val] / (gen)
+        else:
+            stats["Average"][val] = stats["Average"][val]/(gen-1)
     show_summary(gen, size, pattern, p_alive, wraparound,stats)
 
 

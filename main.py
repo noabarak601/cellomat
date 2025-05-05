@@ -31,6 +31,6 @@ ensure_package("numpy")
 
 import pygame      # noqa: F401  (already guaranteed present)
 import numpy as np # noqa: F401
-4
+
 if __name__ == "__main__":
     launch_welcome_screen()

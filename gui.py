@@ -179,6 +179,16 @@ def launch_welcome_screen():
         root.destroy()
 
         steps = steps_var.get()
+        if steps:
+            try:
+                steps_int = int(steps)
+                if steps_int < 2:
+                    raise ValueError
+            except ValueError:
+                messagebox.showerror("Invalid Input", "Steps must be an integer greater than or equal to 2.")
+                return
+        else:
+            steps_int = 0  # or some default if steps are optiona
         run_game(size=size,
                  pattern=pattern,
                  p_alive=odds,
@@ -229,11 +239,19 @@ def launch_welcome_screen():
     spaceship_W = ttk.Radiobutton(special_frame, text="Spaceship West", variable=special_pattern_var, value="spaceship_W")
     spaceship_N = ttk.Radiobutton(special_frame, text="Spaceship North", variable=special_pattern_var, value="spaceship_N")
     spaceship_S = ttk.Radiobutton(special_frame, text="Spaceship South", variable=special_pattern_var, value="spaceship_S")
+    zero = ttk.Radiobutton(special_frame, text="zero", variable=special_pattern_var,value="zero")
+    columns = ttk.Radiobutton(special_frame, text="columns", variable=special_pattern_var, value="columns")
+    squares = ttk.Radiobutton(special_frame, text="squares", variable=special_pattern_var,value="squares")
+
+
 
     spaceship_E.pack(anchor="w")
     spaceship_W.pack(anchor="w")
     spaceship_N.pack(anchor="w")
     spaceship_S.pack(anchor="w")
+    zero.pack(anchor="w")
+    columns.pack(anchor="w")
+    squares.pack(anchor="w")
 
     special_frame.pack_forget()  # hide initially
 

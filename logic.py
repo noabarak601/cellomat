@@ -87,8 +87,85 @@ PATTERNS = {
 
 
 # ---- helper ----------------------------------------------------------------
+def create_columns_matrix(n):
+    if n < 6:
+        raise ValueError("Matrix size must be at least 6.")
 
+    # Initialize empty matrix
+    matrix = [[0 for _ in range(n)] for _ in range(n)]
+    bool = True
+    # Define the 6x6 loop pattern
+    for i in range(n):
+        for j in range(n):
+            if(bool == True):
+                matrix[i][j] = 1
+                bool = False
+            else:
+                bool = True
+    return matrix
+
+def create_zero_matrix(n):
+    if n < 6:
+        raise ValueError("Matrix size must be at least 6.")
+
+    # Initialize empty matrix
+    matrix = [[0 for _ in range(n)] for _ in range(n)]
+
+    # Define the 6x6 loop pattern
+    pattern = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 1, 0],
+        [0, 1, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0]
+    ]
+
+    # Choose a random top-left coordinate where the pattern will fit
+    max_start = n - 6
+    start_row = random.randint(0, max_start)
+    start_col = random.randint(0, max_start)
+
+    # Insert the pattern into the matrix
+    for i in range(6):
+        for j in range(6):
+            matrix[start_row + i][start_col + j] = pattern[i][j]
+
+    return matrix
+
+def create_squeres_matrix(n):
+    if n < 4:
+        raise ValueError("Matrix size must be at least 4.")
+
+    # Initialize empty matrix
+    matrix = [[0 for _ in range(n)] for _ in range(n)]
+
+    # Define the 4x4 periodic blinker pattern
+    pattern = [
+        [1, 1, 0, 0],
+        [1, 1, 0, 0],
+        [0, 0, 1, 1],
+        [0, 0, 1, 1]
+    ]
+
+    # Choose a random top-left coordinate where the pattern will fit
+    max_start = n - 4
+    start_row = random.randint(0, max_start)
+    start_col = random.randint(0, max_start)
+
+    # Insert the pattern into the matrix
+    for i in range(4):
+        for j in range(4):
+            matrix[start_row + i][start_col + j] = pattern[i][j]
+
+    return matrix
 def create_glider_matrix(size: int, glider: str):
+    if glider == "zero":
+        return create_zero_matrix(size)
+    elif(glider == "squares"):
+        return create_squeres_matrix(size)
+    elif(glider == "columns"):
+        return create_columns_matrix(size)
     """
     Return an `size × size` list‑of‑lists containing exactly one copy of the
     requested pattern in a random legal position (fully inside the board).
