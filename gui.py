@@ -5,7 +5,6 @@ from logic import create_random_matrix
 from gui_pygame import run_game
 
 
-# gui.py  (תחילת הקובץ)
 
 # --- make sure pygame is available ---
 try:
@@ -16,7 +15,7 @@ except ModuleNotFoundError:
     import pygame
 # -------------------------------------
 
-from gui_pygame import run_game      # <-- נוסיף  import חדש
+from gui_pygame import run_game
 
 
 def launch_welcome_screen():

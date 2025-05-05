@@ -31,7 +31,7 @@ def create_map():
         map[par] = {}
     for est in TABLE_ROWS:
         map["Average"][est] = 0
-        map["Standard deviation"][est] = float('inf')
+        map["Standard deviation"][est] = 0.0
         map["Maximum"][est] = float('-inf')
         map["Minimum"][est] = float('inf')
     return map

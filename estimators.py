@@ -30,17 +30,6 @@ def death_rate(prev: np.ndarray, curr: np.ndarray) -> float:
 # ---------------------------------------------------------------------------
 
 
-def boundary_energy(board: np.ndarray) -> float:
-    """
-    'אנרגיה' – מספר זוגות שכנים חיים‑חיים (4‑שכנות) חלקי גודל לוח.
-    ערך גבוה → אשכולות צפופים; נמוך → פיזור.
-    """
-    live = board.astype(int)
-    vert  = np.sum(live[:-1, :] * live[1:, :])
-    horiz = np.sum(live[:, :-1] * live[:, 1:])
-    return (vert + horiz) / board.size
-
-
 
 def update_stats(stats, board, board_copy,gen):
     # Convert to np.ndarray once
@@ -58,8 +47,11 @@ def update_stats(stats, board, board_copy,gen):
 
     if(stats["Maximum"]["Stability"] < curr_stability):
         stats["Maximum"]["Stability"] = curr_stability
+    if(gen < 2):
+        stats["Standard deviation"]["Stability"] = 0
+    else:
 
-    stats["Standard deviation"]["Stability"] = update_std(gen-1,stats["Average"]["Stability"]/gen,stats["Standard deviation"]["Stability"],curr_stability)
+        stats["Standard deviation"]["Stability"] = update_std(gen-1,stats["Average"]["Stability"]/gen,stats["Standard deviation"]["Stability"],curr_stability)
 
     # 2) Birth Rate
     curr_birthrate = birth_rate(prev_np, curr_np)
@@ -70,8 +62,10 @@ def update_stats(stats, board, board_copy,gen):
 
     if (stats["Maximum"]["Birth Rate"] < curr_birthrate):
         stats["Maximum"]["Birth Rate"] = curr_birthrate
-
-    stats["Standard deviation"]["Birth Rate"] = update_std(gen-1,
+    if(gen < 2):
+        stats["Standard deviation"]["Birth Rate"] = 0
+    else:
+        stats["Standard deviation"]["Birth Rate"] = update_std(gen-1,
                                                            stats["Average"]["Birth Rate"]/gen,
                                                            stats["Standard deviation"]["Birth Rate"], curr_birthrate)
 
@@ -84,8 +78,10 @@ def update_stats(stats, board, board_copy,gen):
 
     if (stats["Maximum"]["Death Rate"] < curr_deathrate):
         stats["Maximum"]["Death Rate"] = curr_deathrate
-
-    stats["Standard deviation"]["Death Rate"] = update_std(gen-1,stats["Average"]["Death Rate"]/gen,stats["Standard deviation"]["Death Rate"],curr_deathrate)
+    if(gen < 2):
+        stats["Standard deviation"]["Death Rate"] = 0
+    else:
+        stats["Standard deviation"]["Death Rate"] = update_std(gen-1,stats["Average"]["Death Rate"]/gen,stats["Standard deviation"]["Death Rate"],curr_deathrate)
 
 
 
